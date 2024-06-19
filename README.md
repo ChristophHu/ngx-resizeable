@@ -1,27 +1,56 @@
 # NgxResizeable
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
 
-## Development server
+## Demo
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+[Demo](https://christophhu.github.io/ngx-resizeable/)
 
-## Code scaffolding
+## Use
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The resizeable element in the component needs the `Resizeable`-Directive and some properties. Every single Edge need it's own space with a `Rezise`-Directive.
+```html
+<div class="relative flex top-32 h-32 w-32 m-auto bg-red-500 box-border" [ngStyle]="style" Resizeable [validateResize]="validate" [enableGhostResize]="true" [resizeSnapGrid]="{ left: 50, right: 50 }" (resizeEnd)="onResizeEnd($event)">
+    <div class="absolute h-1 w-full top-0 cursor-row-resize" Resize [resizeEdges]="{ top: true }"></div>
+    <div class="absolute h-full w-1 left-0 cursor-col-resize" Resize [resizeEdges]="{ left: true }"></div>
+    <div class="absolute h-full w-1 right-0 cursor-col-resize" Resize [resizeEdges]="{ right: true }"></div>
+    <div class="absolute h-1 w-full bottom-0 cursor-row-resize" Resize [resizeEdges]="{ bottom: true }"></div>
+</div>
+```
 
-## Build
+The position of the element will be set by the style.
+```typescript
+Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [
+    NgxResizeableDirective,
+    ResizeHandleDirective,
+    NgStyle,
+    ...
+  ],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.sass'
+})
+export class Cmp {
+  public style: object = {}
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+  validate(event: ResizeEvent): boolean {
+    const MIN_DIMENSIONS_PX: number = 50
+    if (event.rectangle.width && event.rectangle.height && (event.rectangle.width < MIN_DIMENSIONS_PX || event.rectangle.height < MIN_DIMENSIONS_PX)) {
+      return false
+    }
+    return true
+  }
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+  onResizeEnd(event: any): void {
+    this.style = {
+      position: 'fixed',
+      left: `${event.rectangle.left}px`,
+      top: `${event.rectangle.top}px`,
+      width: `${event.rectangle.width}px`,
+      height: `${event.rectangle.height}px`
+    }
+  }
+}
+``` 
