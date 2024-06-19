@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "publish": "npm run ngx:build && npm run ngx:publish",
+    "ngx:build": "ng build ngx-resizeable",
+    "ngx:publish": "cd dist/ngx-resizeable && npm publish --access public"
   },
   "private": false,
   "dependencies": {
@@ -18,6 +21,7 @@
     "@angular/platform-browser": "^17.3.0",
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
+    "@christophhu/ngx-resizeable": "^1.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
