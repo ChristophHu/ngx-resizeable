@@ -1,11 +1,11 @@
-import { Directive, Renderer2, ElementRef, OnInit, Output, Input, EventEmitter, OnDestroy, NgZone, Inject, PLATFORM_ID } from '@angular/core';
+import { Directive, Renderer2, ElementRef, OnInit, Output, Input, EventEmitter, OnDestroy, NgZone, Inject, PLATFORM_ID } from '@angular/core'
 import { isPlatformBrowser } from '@angular/common'
 import { Subject, Observable, Observer, merge } from 'rxjs'
-import { map, mergeMap, takeUntil, filter, pairwise, take, share, tap } from 'rxjs/operators';
-import { BoundingRectangle } from './models/bounding-rectangle.model';
-import { Edges } from './models/edges.model';
-import { ResizeEvent } from './models/resize-event.model';
-import { IS_TOUCH_DEVICE, deepCloneNode } from './utils/utils';
+import { map, mergeMap, takeUntil, filter, pairwise, take, share, tap } from 'rxjs/operators'
+import { BoundingRectangle } from './models/bounding-rectangle.model'
+import { Edges } from './models/edges.model'
+import { ResizeEvent } from './models/resize-event.model'
+import { IS_TOUCH_DEVICE, deepCloneNode } from './utils/utils'
 
 interface PointerEventCoordinate {
   clientX: number
@@ -57,12 +57,7 @@ function getElementRect(element: ElementRef, ghostElementPositioning: string): B
   let translateX = 0
   let translateY = 0
   const style = element.nativeElement.style
-  const transformProperties = [
-    'transform',
-    '-ms-transform',
-    '-moz-transform',
-    '-o-transform',
-  ];
+  const transformProperties = ['transform', '-ms-transform', '-moz-transform', '-o-transform', '-webkit-transform']
   const transform = transformProperties
     .map((property) => style[property])
     .find((value) => !!value)
@@ -85,7 +80,7 @@ function getElementRect(element: ElementRef, ghostElementPositioning: string): B
         element.nativeElement.offsetWidth +
         element.nativeElement.offsetLeft -
         translateX,
-    };
+    }
   } else {
     const boundingRect: BoundingRectangle =
       element.nativeElement.getBoundingClientRect()
@@ -100,7 +95,7 @@ const DEFAULT_RESIZE_CURSORS: ResizeCursors = Object.freeze({
   bottomRight: 'se-resize',
   leftOrRight: 'col-resize',
   topOrBottom: 'row-resize',
-});
+})
 
 function getResizeCursor(edges: Edges, cursors: ResizeCursors): string {
   if (edges.left && edges.top) {
@@ -139,23 +134,23 @@ export const MOUSE_MOVE_THROTTLE_MS: number = 50
 })
 export class NgxResizeableDirective implements OnInit, OnDestroy {
 
-  @Input() validateResize!: (resizeEvent: ResizeEvent) => boolean;
-  @Input() enableGhostResize: boolean = false;
-  @Input() resizeSnapGrid: Edges = {};
-  @Input() resizeCursors: Partial<ResizeCursors> = DEFAULT_RESIZE_CURSORS;
-  @Input() ghostElementPositioning: 'fixed' | 'absolute' = 'fixed';
-  @Input() allowNegativeResizes: boolean = false;
-  @Input() mouseMoveThrottleMS: number = MOUSE_MOVE_THROTTLE_MS;
-  @Output() resizeStart = new EventEmitter<ResizeEvent>();
-  @Output() resizing = new EventEmitter<ResizeEvent>();
-  @Output() resizeEnd = new EventEmitter<ResizeEvent>();
+  @Input() validateResize!: (resizeEvent: ResizeEvent) => boolean
+  @Input() enableGhostResize: boolean = false
+  @Input() resizeSnapGrid: Edges = {}
+  @Input() resizeCursors: Partial<ResizeCursors> = DEFAULT_RESIZE_CURSORS
+  @Input() ghostElementPositioning: 'fixed' | 'absolute' = 'fixed'
+  @Input() allowNegativeResizes: boolean = false
+  @Input() mouseMoveThrottleMS: number = MOUSE_MOVE_THROTTLE_MS
+  @Output() resizeStart = new EventEmitter<ResizeEvent>()
+  @Output() resizing = new EventEmitter<ResizeEvent>()
+  @Output() resizeEnd = new EventEmitter<ResizeEvent>()
 
   public mouseup = new Subject<{ clientX: number; clientY: number; edges?: Edges }>()
-  public mousedown = new Subject<{ clientX: number; clientY: number; edges?: Edges }>();
-  public mousemove = new Subject<{ clientX: number; clientY: number; edges?: Edges; event: MouseEvent | TouchEvent }>();
+  public mousedown = new Subject<{ clientX: number; clientY: number; edges?: Edges }>()
+  public mousemove = new Subject<{ clientX: number; clientY: number; edges?: Edges; event: MouseEvent | TouchEvent }>()
 
-  private pointerEventListeners: PointerEventListeners;
-  private destroy$ = new Subject<void>();
+  private pointerEventListeners: PointerEventListeners
+  private destroy$ = new Subject<void>()
 
   constructor(@Inject(PLATFORM_ID) private platformId: any, private renderer: Renderer2, public elm: ElementRef, private zone: NgZone) {
     this.pointerEventListeners = PointerEventListeners.getInstance(
@@ -168,7 +163,7 @@ export class NgxResizeableDirective implements OnInit, OnDestroy {
    * @hidden
    */
   ngOnInit(): void {
-    const mousedown$: Observable<{ clientX: number; clientY: number; edges?: Edges }> = merge(this.pointerEventListeners.pointerDown, this.mousedown);
+    const mousedown$: Observable<{ clientX: number; clientY: number; edges?: Edges }> = merge(this.pointerEventListeners.pointerDown, this.mousedown)
 
     const mousemove$ = merge(
       this.pointerEventListeners.pointerMove,
@@ -184,7 +179,7 @@ export class NgxResizeableDirective implements OnInit, OnDestroy {
 
     const mouseup$ = merge(this.pointerEventListeners.pointerUp, this.mouseup)
 
-    let currentResize: { edges: Edges; startingRect: BoundingRectangle; currentRect: BoundingRectangle; clonedNode?: HTMLElement } | null;
+    let currentResize: { edges: Edges; startingRect: BoundingRectangle; currentRect: BoundingRectangle; clonedNode?: HTMLElement } | null
 
     const removeGhostElement = () => {
       if (currentResize && currentResize.clonedNode) {
@@ -193,11 +188,11 @@ export class NgxResizeableDirective implements OnInit, OnDestroy {
         )
         this.renderer.setStyle(this.elm.nativeElement, 'visibility', 'inherit')
       }
-    };
+    }
 
     const getResizeCursors = (): ResizeCursors => {
       return { ...DEFAULT_RESIZE_CURSORS, ...this.resizeCursors }
-    };
+    }
 
     const mousedrag: Observable<any> = mousedown$
       .pipe(
@@ -206,11 +201,11 @@ export class NgxResizeableDirective implements OnInit, OnDestroy {
             return {
               clientX: moveCoords.clientX - startCoords.clientX,
               clientY: moveCoords.clientY - startCoords.clientY,
-            };
+            }
           }
 
           const getSnapGrid = () => {
-            const snapGrid: Coordinate = { x: 1, y: 1 };
+            const snapGrid: Coordinate = { x: 1, y: 1 }
 
             if (currentResize) {
               if (this.resizeSnapGrid.left && currentResize.edges.left) {
@@ -233,7 +228,7 @@ export class NgxResizeableDirective implements OnInit, OnDestroy {
             }
 
             return snapGrid
-          };
+          }
 
           function getGrid(coords: { clientX: number; clientY: number }, snapGrid: Coordinate) {
             return { x: Math.ceil(coords.clientX / snapGrid.x), y: Math.ceil(coords.clientY / snapGrid.y)}
@@ -278,8 +273,8 @@ export class NgxResizeableDirective implements OnInit, OnDestroy {
             )
             .pipe(
               map(([, newCoords]) => {
-                const snapGrid: Coordinate = getSnapGrid();
-                return { clientX: Math.round(newCoords.clientX / snapGrid.x) * snapGrid.x, clientY: Math.round(newCoords.clientY / snapGrid.y) * snapGrid.y };
+                const snapGrid: Coordinate = getSnapGrid()
+                return { clientX: Math.round(newCoords.clientX / snapGrid.x) * snapGrid.x, clientY: Math.round(newCoords.clientY / snapGrid.y) * snapGrid.y }
               })
             )
             .pipe(takeUntil(merge(mouseup$, mousedown$)))
@@ -426,7 +421,7 @@ export class NgxResizeableDirective implements OnInit, OnDestroy {
         removeGhostElement()
         currentResize = null
       }
-    });
+    })
   }
 
   ngOnDestroy(): void {
@@ -467,8 +462,8 @@ class PointerEventListeners {
   constructor(renderer: Renderer2, zone: NgZone) {
     this.pointerDown = new Observable(
       (observer: Observer<PointerEventCoordinate>) => {
-        let unsubscribeMouseDown: () => void;
-        let unsubscribeTouchStart: (() => void) | undefined;
+        let unsubscribeMouseDown: () => void
+        let unsubscribeTouchStart: (() => void) | undefined
 
         zone.runOutsideAngular(() => {
           unsubscribeMouseDown = renderer.listen('document', 'mousedown', (event: MouseEvent) => {

@@ -1,12 +1,33 @@
 {
-  "name": "ngx-resizeable",
+  "name": "@christophhu/ngx-resizeable",
   "version": "0.0.1",
+  "description": "Elements can be resized by dragging the edges.",
+  "license": "MIT",
+  "author": {
+    "name": "Christoph Huschenhoefer",
+    "email": "christoph@nxt.codes"
+  },
+  "keywords": [
+    "angular",
+    "Resize",
+    "tailwindcss"
+  ],
   "peerDependencies": {
+    "@angular/cdk": "^17.3.0",
     "@angular/common": "^17.3.0",
-    "@angular/core": "^17.3.0"
+    "@angular/core": "^17.3.0",
+    "@angular/material": "^17.3.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChristophHu/ngx-resizeable.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ChristophHu/ngx-resizeable/issues"
+  },
+  "homepage": "https://github.com/ChristophHu/ngx-resizeable#readme",
   "sideEffects": false
 }
