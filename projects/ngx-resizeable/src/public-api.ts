@@ -3,7 +3,7 @@
  */
 
 // directives
-export * from './lib/ngx-resizeable.directive'
+export * from './lib/resizeable.directive'
 export * from './lib/resize-handle.directive'
 
 // models

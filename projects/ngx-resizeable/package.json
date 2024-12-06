@@ -1,6 +1,6 @@
 {
   "name": "@christophhu/ngx-resizeable",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Elements can be resized by dragging the edges.",
   "license": "MIT",
   "author": {

@@ -1,15 +1,13 @@
-import { NgxResizeableDirective } from './ngx-resizeable.directive';
+import { ResizeableDirective } from './resizeable.directive';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { MOUSE_MOVE_THROTTLE_MS, ResizableDirective } from '../lib/resizable.directive';
-import { Edges } from '../lib/interfaces/edges.interface';
-import { ResizableModule, ResizeEvent } from '../public-api';
+import { Edges, ResizeEvent } from '../public-api';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 
 describe('NgxResizeableDirective', () => {
   it('should create an instance', () => {
-    const directive = new NgxResizeableDirective()
+    const directive = new ResizeableDirective()
     expect(directive).toBeTruthy()
   })
 })
@@ -62,7 +60,7 @@ describe('NgxResizeableDirective', () => {
     <div
       class="rectangle"
       [ngStyle]="style"
-      nxtResizable
+      nxtresizeable
       [validateResize]="validate"
       [enableGhostResize]="enableGhostResize"
       [resizeSnapGrid]="resizeSnapGrid"
@@ -104,8 +102,8 @@ describe('NgxResizeableDirective', () => {
   `,
 })
 class TestComponent {
-  @ViewChild(ResizableDirective) resizable: ResizableDirective;
-  @ViewChild('handle') handle: ElementRef;
+  @ViewChild(ResizeableDirective) resizeable!: ResizeableDirective;
+  @ViewChild('handle') handle!: ElementRef;
   style: object = {};
   resizeStart: sinon.SinonSpy = sinon.spy();
   resizing: sinon.SinonSpy = sinon.spy();
@@ -125,7 +123,7 @@ class TestComponent {
   allowNegativeResizes = false;
 }
 
-describe('resizable directive', () => {
+describe('resizeable directive', () => {
   function triggerDomEvent(
     eventType: string,
     target: HTMLElement | Element,
@@ -139,7 +137,7 @@ describe('resizable directive', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ResizableModule],
+      imports: [],
       declarations: [TestComponent],
     });
   });
@@ -484,7 +482,7 @@ describe('resizable directive', () => {
     afterEach(() => {
       const fixture: ComponentFixture<TestComponent> = createComponent();
       const elm: HTMLElement =
-        fixture.componentInstance.resizable.elm.nativeElement;
+        fixture.componentInstance.resizeable.elm.nativeElement;
       domEvents.forEach((event) => {
         const element = fixture.nativeElement.querySelector(
           '.resize-handle-' + Object.keys(expectedEvent.edges)[0]
@@ -549,17 +547,17 @@ describe('resizable directive', () => {
       <div
         class="rectangle"
         [ngStyle]="style"
-        nxtResizable
-        #container='nxtResizable'
+        Resizeable
+        #container='Resizeable'
         (resizeStart)="resizeStart($event)"
       >
       </div>
        <span
           style="width: 5px; height: 5px; position: absolute; bottom: 5px; right: 5px"
           class="resize-handle"
-          mwlResizeHandle
+          ResizeHandle
           #handle
-          [resizableContainer]='container'
+          [resizeableContainer]='container'
           [resizeEdges]="{right: true}">
         </span>
     `;
@@ -581,7 +579,7 @@ describe('resizable directive', () => {
   it('should not resize when clicking and dragging outside of the element edges', () => {
     const fixture: ComponentFixture<TestComponent> = createComponent();
     const elm: HTMLElement =
-      fixture.componentInstance.resizable.elm.nativeElement;
+      fixture.componentInstance.resizeable.elm.nativeElement;
     triggerDomEvent('mousedown', elm, {
       clientX: 10,
       clientY: 20,
@@ -606,7 +604,7 @@ describe('resizable directive', () => {
   it('should cancel an existing resize event', () => {
     const fixture: ComponentFixture<TestComponent> = createComponent();
     const elm: HTMLElement =
-      fixture.componentInstance.resizable.elm.nativeElement;
+      fixture.componentInstance.resizeable.elm.nativeElement;
 
     const leftHandle = fixture.nativeElement.querySelector(
       '.resize-handle-left'
@@ -682,7 +680,7 @@ describe('resizable directive', () => {
   it('should set the cloned elements width and height on the resize start', () => {
     const fixture: ComponentFixture<TestComponent> = createComponent();
     const elm: HTMLElement =
-      fixture.componentInstance.resizable.elm.nativeElement;
+      fixture.componentInstance.resizeable.elm.nativeElement;
     const handle = fixture.nativeElement.querySelector('.resize-handle-top');
     triggerDomEvent('mousedown', handle, {
       clientX: 100,
@@ -695,7 +693,7 @@ describe('resizable directive', () => {
   it('should reset existing styles after a resize', () => {
     const fixture: ComponentFixture<TestComponent> = createComponent();
     const elm: HTMLElement =
-      fixture.componentInstance.resizable.elm.nativeElement;
+      fixture.componentInstance.resizeable.elm.nativeElement;
     const handle = fixture.nativeElement.querySelector('.resize-handle-top');
     triggerDomEvent('mousedown', handle, {
       clientX: 100,
@@ -895,7 +893,7 @@ describe('resizable directive', () => {
       <div
         class="rectangle"
         [ngStyle]="style"
-        nxtResizable
+        nxtresizeable
         (resizeStart)="resizeStart($event)"
         (resizing)="resizing($event)"
         (resizeEnd)="resizeEnd($event)">
@@ -909,7 +907,7 @@ describe('resizable directive', () => {
     `;
     const fixture: ComponentFixture<TestComponent> = createComponent(template);
 
-    const elm: any = fixture.componentInstance.resizable.elm.nativeElement;
+    const elm: any = fixture.componentInstance.resizeable.elm.nativeElement;
     triggerDomEvent('mousedown', elm.querySelector('.resize-handle'), {
       clientX: 395,
       clientY: 345,
@@ -971,7 +969,7 @@ describe('resizable directive', () => {
     fixture.componentInstance.enableGhostResize = false;
     fixture.detectChanges();
     const elm: HTMLElement =
-      fixture.componentInstance.resizable.elm.nativeElement;
+      fixture.componentInstance.resizeable.elm.nativeElement;
     const handle = fixture.nativeElement.querySelector('.resize-handle-left');
     triggerDomEvent('mousedown', handle, {
       clientX: 100,
@@ -1061,7 +1059,7 @@ describe('resizable directive', () => {
     const fixture: ComponentFixture<TestComponent> = createComponent();
     fixture.detectChanges();
     const elm: HTMLElement =
-      fixture.componentInstance.resizable.elm.nativeElement;
+      fixture.componentInstance.resizeable.elm.nativeElement;
     const handle = fixture.nativeElement.querySelector('.resize-handle-left');
     triggerDomEvent('mousedown', handle, {
       clientX: 100,
@@ -1083,7 +1081,7 @@ describe('resizable directive', () => {
     const fixture: ComponentFixture<TestComponent> = createComponent();
     fixture.detectChanges();
     const onComplete: sinon.SinonSpy = sinon.spy();
-    fixture.componentInstance.resizable.mouseup.subscribe(
+    fixture.componentInstance.resizeable.mouseup.subscribe(
       () => '',
       () => '',
       onComplete
@@ -1096,7 +1094,7 @@ describe('resizable directive', () => {
     const fixture: ComponentFixture<TestComponent> = createComponent();
     fixture.detectChanges();
     const onComplete: sinon.SinonSpy = sinon.spy();
-    fixture.componentInstance.resizable.mousedown.subscribe(
+    fixture.componentInstance.resizeable.mousedown.subscribe(
       () => '',
       () => '',
       onComplete
@@ -1109,7 +1107,7 @@ describe('resizable directive', () => {
     const fixture: ComponentFixture<TestComponent> = createComponent();
     fixture.detectChanges();
     const onComplete: sinon.SinonSpy = sinon.spy();
-    fixture.componentInstance.resizable.mousemove.subscribe(
+    fixture.componentInstance.resizeable.mousemove.subscribe(
       () => '',
       () => '',
       onComplete
@@ -1122,7 +1120,7 @@ describe('resizable directive', () => {
     const fixture: ComponentFixture<TestComponent> = createComponent();
     fixture.detectChanges();
     const elm: HTMLElement =
-      fixture.componentInstance.resizable.elm.nativeElement;
+      fixture.componentInstance.resizeable.elm.nativeElement;
     const handle = fixture.nativeElement.querySelector('.resize-handle-left');
     triggerDomEvent('mousemove', handle, {
       clientX: 100,
@@ -1150,7 +1148,7 @@ describe('resizable directive', () => {
     fixture.detectChanges();
     const handle = fixture.nativeElement.querySelector('.resize-handle-left');
     const elm: HTMLElement =
-      fixture.componentInstance.resizable.elm.nativeElement;
+      fixture.componentInstance.resizeable.elm.nativeElement;
     triggerDomEvent('mousedown', handle, {
       clientX: 100,
       clientY: 200,
@@ -1270,7 +1268,7 @@ describe('resizable directive', () => {
          <div
           class="rectangle"
           [ngStyle]="style"
-          nxtResizable
+          nxtresizeable
           [validateResize]="validate"
           [enableGhostResize]="enableGhostResize"
           [resizeSnapGrid]="resizeSnapGrid"
@@ -1364,7 +1362,7 @@ describe('resizable directive', () => {
       fixture.detectChanges();
 
       const elm: HTMLElement =
-        fixture.componentInstance.resizable.elm.nativeElement;
+        fixture.componentInstance.resizeable.elm.nativeElement;
       domEvents.forEach((event) => {
         const handleElem: HTMLElement = fixture.nativeElement.querySelector(
           '.resize-handle-' + edge
@@ -1392,7 +1390,7 @@ describe('resizable directive', () => {
       <div
         class="rectangle"
         [ngStyle]="style"
-        nxtResizable
+        nxtresizeable
         (resizeStart)="resizeStart($event)"
         (resizing)="resizing($event)"
         (resizeEnd)="resizeEnd($event)">
@@ -1407,7 +1405,7 @@ describe('resizable directive', () => {
     `;
     const fixture: ComponentFixture<TestComponent> = createComponent(template);
 
-    const elm = fixture.componentInstance.resizable.elm.nativeElement;
+    const elm = fixture.componentInstance.resizeable.elm.nativeElement;
     fixture.componentInstance.showResizeHandle = true;
     fixture.detectChanges();
     triggerDomEvent('mousedown', elm.querySelector('.resize-handle'), {
@@ -1433,7 +1431,7 @@ describe('resizable directive', () => {
   it('should set the resize cursor on the body when resizing', () => {
     const fixture: ComponentFixture<TestComponent> = createComponent();
     const elm: HTMLElement =
-      fixture.componentInstance.resizable.elm.nativeElement;
+      fixture.componentInstance.resizeable.elm.nativeElement;
     const handle = fixture.nativeElement.querySelector('.resize-handle-left');
     triggerDomEvent('mousedown', handle, {
       clientX: 100,
@@ -1454,7 +1452,7 @@ describe('resizable directive', () => {
   it('should respect the css transform on the element', () => {
     const fixture: ComponentFixture<TestComponent> = createComponent();
     const elm: HTMLElement =
-      fixture.componentInstance.resizable.elm.nativeElement;
+      fixture.componentInstance.resizeable.elm.nativeElement;
     elm.style.transform = 'translate(10px, 20px)';
     const handle = fixture.nativeElement.querySelector('.resize-handle-left');
     triggerDomEvent('mousedown', handle, {
@@ -1479,7 +1477,7 @@ describe('resizable directive', () => {
   it('should respect the css transform on the element with negative values', () => {
     const fixture: ComponentFixture<TestComponent> = createComponent();
     const elm: HTMLElement =
-      fixture.componentInstance.resizable.elm.nativeElement;
+      fixture.componentInstance.resizeable.elm.nativeElement;
     elm.style.transform = 'translate(-10px, -20px)';
     const handle = fixture.nativeElement.querySelector('.resize-handle-left');
     triggerDomEvent('mousedown', handle, {
@@ -1504,7 +1502,7 @@ describe('resizable directive', () => {
   it('should respect the css transform with 3d property translate on the element', () => {
     const fixture: ComponentFixture<TestComponent> = createComponent();
     const elm: HTMLElement =
-      fixture.componentInstance.resizable.elm.nativeElement;
+      fixture.componentInstance.resizeable.elm.nativeElement;
     elm.style.transform = 'translate3d(10px, 20px, 0px)';
     const handle = fixture.nativeElement.querySelector('.resize-handle-left');
     triggerDomEvent('mousedown', handle, {
@@ -1599,7 +1597,7 @@ describe('resizable directive', () => {
       <div
        class="rectangle"
         [ngStyle]="style"
-        nxtResizable
+        nxtresizeable
         [enableGhostResize]="enableGhostResize"
       >
         <canvas id="canvas"></canvas>
@@ -1618,7 +1616,7 @@ describe('resizable directive', () => {
     ctx.fillText('Canvas text example', 0, 0);
     const canvasData = canvas.toDataURL();
 
-    const elm = fixture.componentInstance.resizable.elm.nativeElement;
+    const elm = fixture.componentInstance.resizeable.elm.nativeElement;
     triggerDomEvent('mousedown', handle, {
       clientX: 100,
       clientY: 200,

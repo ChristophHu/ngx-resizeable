@@ -1,28 +1,28 @@
 export function deepCloneNode(node: HTMLElement): HTMLElement {
-    const clone = node.cloneNode(true) as HTMLElement;
-    const descendantsWithId = clone.querySelectorAll('[id]');
-    const nodeName = node.nodeName.toLowerCase();
+    const clone = node.cloneNode(true) as HTMLElement
+    const descendantsWithId = clone.querySelectorAll('[id]')
+    const nodeName = node.nodeName.toLowerCase()
 
     // Remove the `id` to avoid having multiple elements with the same id on the page.
-    clone.removeAttribute('id');
+    clone.removeAttribute('id')
 
     descendantsWithId.forEach((descendant) => {
-        descendant.removeAttribute('id');
-    });
+        descendant.removeAttribute('id')
+    })
 
     if (nodeName === 'canvas') {
-        transferCanvasData(node as HTMLCanvasElement, clone as HTMLCanvasElement);
+        transferCanvasData(node as HTMLCanvasElement, clone as HTMLCanvasElement)
     } else if (
         nodeName === 'input' ||
         nodeName === 'select' ||
         nodeName === 'textarea'
     ) {
-        transferInputData(node as HTMLInputElement, clone as HTMLInputElement);
+        transferInputData(node as HTMLInputElement, clone as HTMLInputElement)
     }
 
-    transferData('canvas', node, clone, transferCanvasData);
-    transferData('input, textarea, select', node, clone, transferInputData);
-    return clone;
+    transferData('canvas', node, clone, transferCanvasData)
+    transferData('input, textarea, select', node, clone, transferInputData)
+    return clone
 }
 
 function transferData<T extends Element>(selector: string, node: HTMLElement, clone: HTMLElement, callback: (source: T, clone: T) => void) {
@@ -46,7 +46,7 @@ function transferInputData(source: Element & { value: string }, clone: Element &
     }
 
     if (clone.type === 'radio' && clone.name) {
-        clone.name = `mat-clone-${clone.name}-${cloneUniqueId++}`;
+        clone.name = `mat-clone-${clone.name}-${cloneUniqueId++}`
     }
 }
 

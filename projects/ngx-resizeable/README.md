@@ -24,7 +24,7 @@ Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    NgxResizeableDirective,
+    ResizeableDirective,
     ResizeHandleDirective,
     NgStyle,
     ...

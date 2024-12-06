@@ -1,4 +1,294 @@
-<div class="text-center">
+<div *ngIf="(user$ | async) as user" class="pt-6 md:pt-8 xl:pt-12 bg-gradient-to-r from-indigo-700 to-purple-500">
+  <div class="mx-auto container px-6">
+      <nav>
+          <ul class="hidden xl:flex items-center w-full justify-between">
+              <li class="flex items-center w-4/5">
+                  <div>
+                      <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg1.svg" alt="logo">
+                  </div>
+                  <div class="2xl:ml-14">
+                      <ul class="flex items-center">
+                          <li>
+                              <div>
+                                  <div class="flex items-center text-sm text-gray-50 pb-1 border-transparent border-b border-white">
+                                      <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg2.svg" alt="dashboard">
+                                      <a href="javascript:void(0)" class="ml-1.5 focus:ring-2 focus:ring-white focus:outline-none">Dashboard</a>
+                                  </div>
+                              </div>
+                          </li>
+                          <li>
+                              <div>
+                                  <div class="flex items-center text-sm text-gray-50 pb-1 border-transparent border-b hover:border-white xl:ml-6 2xl:ml-11">
+                                     <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg3.svg" alt="Calendar">
+                                      <a href="javascript:void(0)" class="mx-1.5 focus:ring-2 focus:ring-white focus:outline-none">Calendar</a>
+                                      <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg4.svg" alt="dropdown">
+                                  </div>
+                              </div>
+                          </li>
+                          <li>
+                              <div>
+                                  <div class="flex items-center text-sm text-gray-50 pb-1 border-transparent border-b hover:border-white xl:ml-6 2xl:ml-11">
+                                     <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg5.svg" alt="chats">
+                                      <a href="javascript:void(0)" class="ml-1.5 focus:ring-2 focus:ring-white focus:outline-none">Chats</a>
+                                  </div>
+                              </div>
+                          </li>
+                          <li>
+                              <div>
+                                  <div class="flex items-center text-sm text-gray-50 pb-1 border-transparent border-b hover:border-white xl:ml-6 2xl:ml-11">
+                                     <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg6.svg" alt="Invoice">
+                                      <a href="javascript:void(0)" class="ml-1.5 focus:ring-2 focus:ring-white focus:outline-none">Invoice</a>
+                                  </div>
+                              </div>
+                          </li>
+                          <li>
+                              <div>
+                                  <div class="flex items-center text-sm text-gray-50 pb-1 border-transparent border-b hover:border-white xl:ml-6 2xl:ml-11">
+                                      <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg7.svg" alt="Projects">
+                                      <a href="javascript:void(0)" class="ml-1.5 focus:ring-2 focus:ring-white focus:outline-none">Projects</a>
+                                  </div>
+                              </div>
+                          </li>
+                          <li>
+                              <div>
+                                  <div class="flex items-center text-sm text-gray-50 pb-1 border-transparent border-b hover:border-white xl:ml-6 2xl:ml-11">
+                                     <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg8.svg" alt="profile">
+                                      <a href="javascript:void(0)" class="ml-1.5 focus:ring-2 focus:ring-white focus:outline-none">Profile</a>
+                                  </div>
+                              </div>
+                          </li>
+                          <li>
+                              <div>
+                                  <div class="flex items-center text-sm text-gray-50 pb-1 border-transparent border-b hover:border-white xl:ml-6 2xl:ml-11">
+                                     <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg9.svg" alt="Tasks">
+                                      <a href="javascript:void(0)" class="mx-1.5 focus:ring-2 focus:ring-white focus:outline-none">Tasks</a>
+                                     <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg10.svg" alt="tasks">
+                                  </div>
+                              </div>
+                          </li>
+                          <li>
+                              <div>
+                                  <div class="flex items-center text-sm text-gray-50 pb-1 border-transparent border-b hover:border-white xl:ml-6 2xl:ml-11">
+                                    <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg11.svg" alt="users">
+                                      <a href="javascript:void(0)" class="ml-1.5 focus:ring-2 focus:ring-white focus:outline-none">Users</a>
+                                  </div>
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+              <li class="w-1/5 flex justify-end">
+                  <ul class="flex items-center">
+                      <li>
+                          <button aria-label="show notifications" class="relative cursor-pointer pb-1 border-transparent border-b hover:border-white focus:ring-2 focus:outline-none focus:ring-offset-2 focus:ring-white">
+                            <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg12.svg" alt="notifications">
+                              <div class="w-4 h-4 rounded-full bg-gray-800 flex items-center justify-center absolute top-0 right-0 -mr-1.5 -mt-0.5">
+                                  <p class="text-xs font-bold text-center text-gray-50">1</p>
+                              </div>
+                          </button>
+                      </li>
+                      <li>
+                          <button aria-label="open settings" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white xl:ml-6 2xl:ml-9 ">
+                              <div class="pb-1 border-transparent border-b hover:border-white">
+                                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg13.svg" alt="settings">
+                              </div>
+                          </button>
+                      </li>
+                      <li>
+                          <button aria-label="show menu" class="pb-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white xl:ml-6 2xl:ml-9" >
+                              <div class=" border-transparent border-b hover:border-white">
+                                 <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg14.svg" alt="pattern">
+                              </div>
+                          </button>
+                      </li>
+                  </ul>
+              </li>
+          </ul>
+      </nav>
+      <nav>
+          <div class="flex items-center xl:hidden w-full justify-between">
+              <div>
+                  <a href="./dashboard.html">
+                      <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg1.svg" alt="logo">
+                  </a>
+              </div>
+              <div>
+                  <button class="cursor-pointer focus:outline-none focus:ring-2 focus:ring-white rounded" onclick="mobMenu1(true)">
+                      <img id="open" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg15.svg" alt="toggler">
+                      <svg aria-label="close menu" xmlns="http://www.w3.org/2000/svg" id="close" class="hidden icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <line x1="18" y1="6" x2="6" y2="18" />
+                          <line x1="6" y1="6" x2="18" y2="18" />
+                      </svg>
+                  </button>
+
+                  <ul class="hidden transition duration-300 opacity-100 ease-out bg-white shadow rounded py-1 w-full top-0 left-0 mt-16 z-20 absolute" id="mob-menu">
+                      <li>
+                          <div class="flex items-center text-sm text-gray-900 p-4">
+                              <a href="javascript:void(0)" class="flex items-center" >
+                             <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg17.svg" alt="dashboard">
+                                  <p class="ml-1.5">Dashboard</p>
+                              </a>
+                              </div>
+                      </li>
+                      <li>
+                          <div class="flex items-center text-sm text-gray-900 p-4">
+                              <a href="javascript:void(0)" class="flex items-center">
+                                 <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg18.svg" alt="Calendar">
+                                  <p class="mx-1.5">Calendar</p>
+                                 <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg19.svg" alt="toggler">
+                              </a>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="flex items-center text-sm text-gray-900 p-4">
+                              <a href="javascript:void(0)"  class="flex items-center">
+                                 <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg20.svg" alt="chats">
+                                  <p class="ml-1.5">Chats</p>
+                              </a>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="flex items-center text-sm text-gray-900 p-4">
+                              <a href="javascript:void(0)"  class="flex items-center">
+                                 <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg21.svg" alt="Invoice">
+                                  <p class="ml-1.5">Invoice</p>
+                              </a>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="flex items-center text-sm text-gray-900 p-4">
+                              <a href="javascript:void(0)"  class="flex items-center">
+                                 <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg22.svg" alt="Projects">
+                                  <p class="ml-1.5">Projects</p>
+                              </a>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="flex items-center text-sm text-gray-900 p-4">
+                              <a href="javascript:void(0)"  class="flex items-center">
+                                 <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg23.svg" alt="profile">
+                                  <p class="ml-1.5">Profile</p>
+                              </a>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="flex items-center text-sm text-gray-900 p-4">
+                              <a href="javascript:void(0)"  class="flex items-center">
+                                 <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg24.svg" alt="tasks">
+                                  <p class="mx-1.5">Tasks</p>
+                                 <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg25.svg" alt="dropdown">
+                              </a>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="flex items-center text-sm text-gray-900 p-4">
+                              <a href="javascript:void(0)"  class="flex items-center">
+                                  <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/boxed_layout-svg26.svg" alt="users">
+                                  <p class="ml-1.5">Users</p>
+                              </a>
+                          </div>
+                      </li>
+                      <!-- <li>
+                          <div class="flex items-center text-sm text-gray-900 p-4">
+                              <a href="javascript:void(0)">
+                                  <p>Notification</p>
+                              </a>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="flex items-center text-sm text-gray-900 p-4">
+                              <a href="javascript:void(0)">
+                                  <p>Settings</p>
+                              </a>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="flex items-center text-sm text-gray-900 p-4">
+                              <a href="javascript:void(0)">
+                                  <p>Options</p>
+                              </a>
+                          </div>
+                      </li> -->
+                  </ul>
+              </div>
+          </div>
+      </nav>
+      <div class="xl:flex items-center flex-wrap">
+          <div class="xl:w-3/4 2xl:w-4/5"></div>
+          <div class="xl:w-1/4 2xl:w-1/5 flex flex-col items-center xl:pl-8 py-16 md:py-12">
+              <div class="w-full flex items-center justify-center">
+                  <div class="flex flex-col items-center">
+                    <img class="h-20 w-20 rounded-full" [src]="user.avatar_url" alt="avatar" role="img" />
+                    <p class="mt-2 text-xs sm:text-sm md:text-base font-semibold text-center text-white">Christoph Hu</p>
+                  </div>
+              </div>
+              <div class="flex items-center mt-7">
+                  <div class="">
+                      <p class="text-xs text-gray-300">Products</p>
+                      <p class="mt-2 text-base sm:text-lg md:text-xl 2xl:text-2xl text-gray-50">28</p>
+                  </div>
+                  <div class="ml-12">
+                      <p class="text-xs text-gray-300">Revenue</p>
+                      <p class="mt-2 text-base sm:text-lg md:text-xl 2xl:text-2xl text-gray-50">$2890</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="px-4 xl:px-0">
+  <div class="mx-auto container">
+      <div class="xl:flex">
+          <div class="xl:w-3/4 2xl:w-4/5 -mt-8 xl:-mt-64">
+              <div class="pl-4 md:pl-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg shadow">
+                  <p class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">Page Heading</p>
+              </div>
+              <div class="bg-white shadow-lg pb-8 px-4 md:px-8 xl:px-10 h-5/6">
+                  <!-- Enter Code Here -->
+              </div>
+          </div>
+          <div class="xl:w-1/4 2xl:w-1/5 pt-7 xl:pl-8 pb-7">
+              <div>
+                  <p class="text-base font-semibold text-gray-800">Recent Updates</p>
+                  <div class="mt-4">
+                      <div class="flex bg-gray-100 border border-gray-400 h-16 border-dashed shadow items-center w-full justify-between rounded">
+                          <!-- Remove Height  -->
+                          <!-- Enter Code Here  -->
+                      </div>
+                      <div class="flex mt-4 bg-gray-100 border border-gray-400 h-16 border-dashed shadow items-center w-full justify-between rounded">
+                          <!-- Remove Height  -->
+                          <!-- Enter Code Here  -->
+                      </div>
+                      <div class="flex mt-4 bg-gray-100 border border-gray-400 h-16 border-dashed shadow items-center w-full justify-between rounded">
+                          <!-- Remove Height  -->
+                          <!-- Enter Code Here  -->
+                      </div>
+                      <div class="flex mt-4 bg-gray-100 border border-gray-400 h-16 border-dashed shadow items-center w-full justify-between rounded">
+                          <!-- Remove Height  -->
+                          <!-- Enter Code Here  -->
+                      </div>
+                  </div>
+              </div>
+              <div class="mt-7">
+                  <p class="text-base font-semibold text-gray-800">Sub-Heading</p>
+                  <div class="flex mt-4 bg-gray-100 border border-gray-400 h-20 border-dashed shadow items-center w-full justify-between rounded">
+                      <!-- Remove Height  -->
+                      <!-- Enter Code Here  -->
+                  </div>
+                  <div class="flex mt-4 bg-gray-100 border border-gray-400 h-20 border-dashed shadow items-center w-full justify-between rounded">
+                      <!-- Remove Height  -->
+                      <!-- Enter Code Here  -->
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<!-- <div class="text-center">
   <h1>Drag and pull the edges of the rectangle</h1>
   <div class="relative flex top-32 h-32 w-32 m-auto bg-red-500 box-border" [ngStyle]="style" Resizeable [validateResize]="validate" [enableGhostResize]="true" [resizeSnapGrid]="{ left: 50, right: 50 }" (resizeEnd)="onResizeEnd($event)">
     <div class="absolute h-1 w-full top-0 cursor-row-resize" Resize [resizeEdges]="{ top: true }"></div>
@@ -6,4 +296,4 @@
     <div class="absolute h-full w-1 right-0 cursor-col-resize" Resize [resizeEdges]="{ right: true }"></div>
     <div class="absolute h-1 w-full bottom-0 cursor-row-resize" Resize [resizeEdges]="{ bottom: true }"></div>
   </div>
-</div>
+</div> -->
