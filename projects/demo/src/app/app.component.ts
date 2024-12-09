@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 // import { NgxResizeableDirective, ResizeEvent, ResizeHandleDirective } from '../../../ngx-resizeable/src/public-api';
-import { AsyncPipe, NgIf, NgStyle } from '@angular/common';
+import { AsyncPipe, CommonModule, NgIf, NgStyle } from '@angular/common';
 import { NgxResizeableDirective, ResizeEvent, ResizeHandleDirective } from '@christophhu/ngx-resizeable';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
+    CommonModule,
     HttpClientModule,
     NgxResizeableDirective,
     ResizeHandleDirective,
@@ -25,27 +26,90 @@ export class AppComponent {
   user$: Observable<any> = of()
 
   private readonly _repos = new BehaviorSubject<{}[]>([])
-  repos$: Observable<{}[]> = this._repos.asObservable()
+  repos$: Observable<any> = this._repos.asObservable()
+  topRepos$: Observable<any> = of()
+
+  events$: Observable<any> = of()
+  topEvents$: Observable<any> = of()
 
   user: any
   repos: any
   username: string = 'christophhu'
-  apiURL = "https://api.github.com/users"
+  apiURL = "https://api.github.com"
+
+  TOKEN = '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'
+  NXT_TOKEN = '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'
+
+  header = {
+    headers: {
+      Accept: "application/vnd.github.v3.raw+json", "Content-Type": "application/json;charset=UTF-8",
+      Authorization: `token ${this.TOKEN}`,
+    },
+  }
+  header_org = {
+    headers: {
+      Accept: "application/vnd.github.v3.raw+json", "Content-Type": "application/json;charset=UTF-8",
+      Authorization: `token ${this.NXT_TOKEN}`,
+    },
+  }
 
   constructor(private http: HttpClient) {
     this.getSingleUser(this.username).subscribe(data => {
       this.user = data
-      console.log(data)
+       
     })
-    // this._user.next(this.getSingleUser('christophhu'))
     this.user$ = this.getSingleUser(this.username)
+    this.repos$ = this.getRepos(this.username)
+    this.events$ = this.getEvents(this.username)
+
+    this.getRecentUpdates(5)
   }
 
   getSingleUser(username: string) {
-    return this.http.get(`${this.apiURL}/${username}`)
+    return this.http.get(`${this.apiURL}/users/${username}`, this.header)
+  }
+  getRepo(name: string) {
+    return this.http.get(`${this.apiURL}/repos/${name}`, this.header)
+  }
+  getOrgRepo(org: string) {
+    return this.http.get(`${this.apiURL}/repos/${name}`, this.header_org)
   }
   getRepos(username: string) {
-    return this.http.get(`${this.apiURL}/${username}/repos`)
+    return this.http.get(`${this.apiURL}/users/${username}/repos`, this.header)
+  }
+  getEvents(username: string) {
+    return this.http.get(`${this.apiURL}/users/${username}/events`, this.header)
+  }
+  getRecentUpdates(top: number) {
+    this.events$
+    .pipe(take(1))
+    .subscribe(data => {
+      let repos: any[] = []
+      if (data) {
+        data.forEach((repo: any) => {
+          if (repo.type == 'PushEvent') repos.push(repo.repo.name)
+        })
+      }
+      Array.from(new Set(repos)).slice(0, top).forEach(repo => {
+        this.getRepo(repo).pipe(take(1)).subscribe({
+          next: data => {
+            console.log('repo', data)
+          },
+          error: error => {
+            this.getOrgRepo(repo).pipe(take(1)).subscribe({
+              next: data => {
+                console.log('repo', data)
+              },
+              error: error => {
+                console.error('error', error)
+              }
+            })
+          }
+        })
+      })
+      console.log('repos', Array.from(new Set(repos)).slice(0, top))
+      this.topEvents$ = of(Array.from(new Set(repos)).slice(0, top))
+    })
   }
 
   public style: object = {}

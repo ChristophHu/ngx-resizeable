@@ -52,10 +52,10 @@
                 <div>
                     <p class="text-base font-semibold text-gray-800">Recent Updates</p>
                     <div class="mt-4">
-                        <div class="flex bg-gray-100 border border-gray-400 h-16 border-dashed shadow items-center w-full justify-between rounded">
-                            <span></span>
+                        <div class="flex my-2 bg-gray-100 border border-gray-400 h-16 border-dashed shadow items-center w-full justify-between rounded" *ngFor="let repo of (topEvents$ | async)">
+                            <span>{{ repo }}</span>
                         </div>
-                        <div class="flex mt-4 bg-gray-100 border border-gray-400 h-16 border-dashed shadow items-center w-full justify-between rounded">
+                        <!-- <div class="flex mt-4 bg-gray-100 border border-gray-400 h-16 border-dashed shadow items-center w-full justify-between rounded">
                             
                         </div>
                         <div class="flex mt-4 bg-gray-100 border border-gray-400 h-16 border-dashed shadow items-center w-full justify-between rounded">
@@ -63,7 +63,7 @@
                         </div>
                         <div class="flex mt-4 bg-gray-100 border border-gray-400 h-16 border-dashed shadow items-center w-full justify-between rounded">
                             
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
