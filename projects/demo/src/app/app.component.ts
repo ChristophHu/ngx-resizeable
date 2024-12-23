@@ -66,19 +66,19 @@ export class AppComponent {
   }
 
   getSingleUser(username: string) {
-    return this.http.get(`${this.apiURL}/users/${username}`, this.header)
+    return this.http.get(`${this.apiURL}/users/${username}`, this.header).pipe(take(1))
   }
   getRepo(name: string) {
-    return this.http.get(`${this.apiURL}/repos/${name}`, this.header)
+    return this.http.get(`${this.apiURL}/repos/${name}`, this.header).pipe(take(1))
   }
   getOrgRepo(org: string) {
-    return this.http.get(`${this.apiURL}/repos/${name}`, this.header_org)
+    return this.http.get(`${this.apiURL}/repos/${name}`, this.header).pipe(take(1))
   }
   getRepos(username: string) {
-    return this.http.get(`${this.apiURL}/users/${username}/repos`, this.header)
+    return this.http.get(`${this.apiURL}/users/${username}/repos`, this.header).pipe(take(1))
   }
   getEvents(username: string) {
-    return this.http.get(`${this.apiURL}/users/${username}/events`, this.header)
+    return this.http.get(`${this.apiURL}/users/${username}/events`, this.header).pipe(take(1))
   }
   getRecentUpdates(top: number) {
     this.events$

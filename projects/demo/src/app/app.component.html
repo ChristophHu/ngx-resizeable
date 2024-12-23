@@ -1,10 +1,5 @@
 <div *ngIf="(user$ | async) as user" class="gradient_bg pt-6 md:pt-8 xl:pt-12">
     <div class="mx-auto container px-6">
-        <nav>
-            <div class="h-12 w-12">
-                <svg width="100%" height="100%" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g transform="matrix(-0.904852,0.165525,0.16096,0.892505,496.796,-202.998)"><path d="M140.005,511.828L489.553,680.988C516.337,693.95 547.912,691.075 571.987,673.483C596.062,655.89 608.834,626.36 605.329,596.388L563.414,237.857C560.142,209.875 543.135,185.489 518.261,173.112C493.386,160.736 464.05,162.064 440.374,176.638L132.741,366.008C107.11,381.786 92.071,410.626 93.589,441.092C95.106,471.558 112.935,498.728 140.005,511.828Z" style="fill:url(#_Linear1);"/></g><g transform="matrix(-0.886057,-0.24839,-0.239777,0.874289,684.9,-15.9654)"><path d="M140.005,511.828L489.553,680.988C516.337,693.95 547.912,691.075 571.987,673.483C596.062,655.89 608.834,626.36 605.329,596.388L563.414,237.857C560.142,209.875 543.135,185.489 518.261,173.112C493.386,160.736 464.05,162.064 440.374,176.638L132.741,366.008C107.11,381.786 92.071,410.626 93.589,441.092C95.106,471.558 112.935,498.728 140.005,511.828Z" style="fill:url(#_Linear2);"/></g><g transform="matrix(-0.91959,2.89027e-16,0.000722639,0.907174,584.966,-149.4)"><path d="M140.005,511.828L489.553,680.988C516.337,693.95 547.912,691.075 571.987,673.483C596.062,655.89 608.834,626.36 605.329,596.388L563.414,237.857C560.142,209.875 543.135,185.489 518.261,173.112C493.386,160.736 464.05,162.064 440.374,176.638L132.741,366.008C107.11,381.786 92.071,410.626 93.589,441.092C95.106,471.558 112.935,498.728 140.005,511.828Z" style="fill-opacity:0.8;"/></g><g transform="matrix(10.4203,0,0,9.37729,-1941.67,-3640.49)"><text x="198.301px" y="419.15px" style="font-family:'Roboto-Regular', 'Roboto';font-size:12px;fill:white;">NXT</text></g><defs><linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="-0.00247965" gradientUnits="userSpaceOnUse" gradientTransform="matrix(512.418,0,0,524.336,93.4839,426.855)"><stop offset="0" style="stop-color:rgb(247,97,161);stop-opacity:0.8"/><stop offset="1" style="stop-color:rgb(140,27,171);stop-opacity:0.8"/></linearGradient><linearGradient id="_Linear2" x1="0" y1="0" x2="1" y2="0.00559945" gradientUnits="userSpaceOnUse" gradientTransform="matrix(512.418,0,0,524.336,93.4839,426.855)"><stop offset="0" style="stop-color:rgb(94,252,232);stop-opacity:0.8"/><stop offset="1" style="stop-color:rgb(115,110,254);stop-opacity:0.8"/></linearGradient></defs></svg>
-            </div>
-        </nav>
         <div class="xl:flex items-center flex-wrap">
             <div class="xl:w-3/4 2xl:w-4/5"></div>
             <div class="xl:w-1/4 2xl:w-1/5 flex flex-col items-center xl:pl-8 py-16 md:py-12">
@@ -36,15 +31,13 @@
                 <div class="pl-4 md:pl-10 py-4 md:py-7 bg-secondary rounded-tl-lg rounded-tr-lg shadow">
                     <span class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-darker">ngx-resizeable</span>
                 </div>
-                <div class="bg-tertiary shadow-lg pb-8 px-4 md:px-8 xl:px-10 h-5/6">
-                    <div class="text-dark">
-                        <p>Drag and pull the edges of the rectangle</p>
-                        <div class="relative flex top-32 h-32 w-32 m-auto gradient_bg box-border" [ngStyle]="style" Resizeable [validateResize]="validate" [enableGhostResize]="true" [resizeSnapGrid]="{ left: 50, right: 50 }" (resizeEnd)="onResizeEnd($event)">
-                            <div class="absolute h-1 w-full top-0 cursor-row-resize" Resize [resizeEdges]="{ top: true }"></div>
-                            <div class="absolute h-full w-1 left-0 cursor-col-resize" Resize [resizeEdges]="{ left: true }"></div>
-                            <div class="absolute h-full w-1 right-0 cursor-col-resize" Resize [resizeEdges]="{ right: true }"></div>
-                            <div class="absolute h-1 w-full bottom-0 cursor-row-resize" Resize [resizeEdges]="{ bottom: true }"></div>
-                        </div>
+                <div class="h-48 p-4 bg-tertiary shadow-lg text-dark">
+                    <p>Drag and pull the edges of the rectangle</p>
+                    <div class="relative flex h-32 w-32 m-auto gradient_bg box-border rounded" [ngStyle]="style" Resizeable [validateResize]="validate" [enableGhostResize]="true" [resizeSnapGrid]="{ left: 50, right: 50 }" (resizeEnd)="onResizeEnd($event)">
+                        <div class="absolute h-1 w-full top-0 cursor-row-resize" Resize [resizeEdges]="{ top: true }"></div>
+                        <div class="absolute h-full w-1 left-0 cursor-col-resize" Resize [resizeEdges]="{ left: true }"></div>
+                        <div class="absolute h-full w-1 right-0 cursor-col-resize" Resize [resizeEdges]="{ right: true }"></div>
+                        <div class="absolute h-1 w-full bottom-0 cursor-row-resize" Resize [resizeEdges]="{ bottom: true }"></div>
                     </div>
                 </div>
             </div>
@@ -52,7 +45,7 @@
                 <div>
                     <p class="text-base font-semibold text-gray-800">Recent Updates</p>
                     <div class="mt-4">
-                        <div class="flex my-2 bg-gray-100 border border-gray-400 h-16 border-dashed shadow items-center w-full justify-between rounded" *ngFor="let repo of (topEvents$ | async)">
+                        <div class="flex my-2 bg-tertiary border border-gray-400 h-16 border-dashed shadow items-center w-full justify-between rounded" *ngFor="let repo of (topEvents$ | async)">
                             <span>{{ repo }}</span>
                         </div>
                         <!-- <div class="flex mt-4 bg-gray-100 border border-gray-400 h-16 border-dashed shadow items-center w-full justify-between rounded">
