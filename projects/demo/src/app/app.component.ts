@@ -1,16 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-// import { NgxResizeableDirective, ResizeEvent, ResizeHandleDirective } from '../../../ngx-resizeable/src/public-api';
+import { NgxResizeableDirective, ResizeEvent, ResizeHandleDirective } from '../../../ngx-resizeable/src/public-api';
 import { NgStyle } from '@angular/common';
-import { NgxResizeableDirective, ResizeEvent, ResizeHandleDirective } from '@christophhu/ngx-resizeable';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [
     NgxResizeableDirective,
     ResizeHandleDirective,
-    RouterOutlet,
     NgStyle
   ],
   templateUrl: './app.component.html',

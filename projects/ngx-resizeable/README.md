@@ -1,56 +1,63 @@
-# Resizeable
+# NgxResizeable
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0.
 
-## Demo
+## Code scaffolding
 
-[Demo](https://christophhu.github.io/ngx-resizeable/)
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-## Use
-
-The resizeable element in the component needs the `Resizeable`-Directive and some properties. Every single Edge need it's own space with a `Rezise`-Directive.
-```html
-<div class="relative flex top-32 h-32 w-32 m-auto bg-red-500 box-border" [ngStyle]="style" Resizeable [validateResize]="validate" [enableGhostResize]="true" [resizeSnapGrid]="{ left: 50, right: 50 }" (resizeEnd)="onResizeEnd($event)">
-    <div class="absolute h-1 w-full top-0 cursor-row-resize" Resize [resizeEdges]="{ top: true }"></div>
-    <div class="absolute h-full w-1 left-0 cursor-col-resize" Resize [resizeEdges]="{ left: true }"></div>
-    <div class="absolute h-full w-1 right-0 cursor-col-resize" Resize [resizeEdges]="{ right: true }"></div>
-    <div class="absolute h-1 w-full bottom-0 cursor-row-resize" Resize [resizeEdges]="{ bottom: true }"></div>
-</div>
+```bash
+ng generate component component-name
 ```
 
-The position of the element will be set by the style.
-```typescript
-Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    NgxResizeableDirective,
-    ResizeHandleDirective,
-    NgStyle,
-    ...
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.sass'
-})
-export class Cmp {
-  public style: object = {}
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-  validate(event: ResizeEvent): boolean {
-    const MIN_DIMENSIONS_PX: number = 50
-    if (event.rectangle.width && event.rectangle.height && (event.rectangle.width < MIN_DIMENSIONS_PX || event.rectangle.height < MIN_DIMENSIONS_PX)) {
-      return false
-    }
-    return true
-  }
+```bash
+ng generate --help
+```
 
-  onResizeEnd(event: any): void {
-    this.style = {
-      position: 'fixed',
-      left: `${event.rectangle.left}px`,
-      top: `${event.rectangle.top}px`,
-      width: `${event.rectangle.width}px`,
-      height: `${event.rectangle.height}px`
-    }
-  }
-}
-``` 
+## Building
+
+To build the library, run:
+
+```bash
+ng build ngx-resizeable
+```
+
+This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+
+### Publishing the Library
+
+Once the project is built, you can publish your library by following these steps:
+
+1. Navigate to the `dist` directory:
+   ```bash
+   cd dist/ngx-resizeable
+   ```
+
+2. Run the `npm publish` command to publish your library to the npm registry:
+   ```bash
+   npm publish
+   ```
+
+## Running unit tests
+
+To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+
+```bash
+ng test
+```
+
+## Running end-to-end tests
+
+For end-to-end (e2e) testing, run:
+
+```bash
+ng e2e
+```
+
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+
+## Additional Resources
+
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

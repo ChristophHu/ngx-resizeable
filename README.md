@@ -1,56 +1,59 @@
 # NgxResizeable
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.0.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
 
-## Demo
+## Development server
 
-[Demo](https://christophhu.github.io/ngx-resizeable/)
+To start a local development server, run:
 
-## Use
-
-The resizeable element in the component needs the `Resizeable`-Directive and some properties. Every single Edge need it's own space with a `Rezise`-Directive.
-```html
-<div class="relative flex top-32 h-32 w-32 m-auto bg-red-500 box-border" [ngStyle]="style" Resizeable [validateResize]="validate" [enableGhostResize]="true" [resizeSnapGrid]="{ left: 50, right: 50 }" (resizeEnd)="onResizeEnd($event)">
-    <div class="absolute h-1 w-full top-0 cursor-row-resize" Resize [resizeEdges]="{ top: true }"></div>
-    <div class="absolute h-full w-1 left-0 cursor-col-resize" Resize [resizeEdges]="{ left: true }"></div>
-    <div class="absolute h-full w-1 right-0 cursor-col-resize" Resize [resizeEdges]="{ right: true }"></div>
-    <div class="absolute h-1 w-full bottom-0 cursor-row-resize" Resize [resizeEdges]="{ bottom: true }"></div>
-</div>
+```bash
+ng serve
 ```
 
-The position of the element will be set by the style.
-```typescript
-Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    NgxResizeableDirective,
-    ResizeHandleDirective,
-    NgStyle,
-    ...
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.sass'
-})
-export class Cmp {
-  public style: object = {}
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-  validate(event: ResizeEvent): boolean {
-    const MIN_DIMENSIONS_PX: number = 50
-    if (event.rectangle.width && event.rectangle.height && (event.rectangle.width < MIN_DIMENSIONS_PX || event.rectangle.height < MIN_DIMENSIONS_PX)) {
-      return false
-    }
-    return true
-  }
+## Code scaffolding
 
-  onResizeEnd(event: any): void {
-    this.style = {
-      position: 'fixed',
-      left: `${event.rectangle.left}px`,
-      top: `${event.rectangle.top}px`,
-      width: `${event.rectangle.width}px`,
-      height: `${event.rectangle.height}px`
-    }
-  }
-}
-``` 
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+
+```bash
+ng generate component component-name
+```
+
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+
+```bash
+ng generate --help
+```
+
+## Building
+
+To build the project run:
+
+```bash
+ng build
+```
+
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+
+## Running unit tests
+
+To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+
+```bash
+ng test
+```
+
+## Running end-to-end tests
+
+For end-to-end (e2e) testing, run:
+
+```bash
+ng e2e
+```
+
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+
+## Additional Resources
+
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
