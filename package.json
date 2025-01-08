@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "preprocess": "tailwindcss -c ./projects/demo/tailwind.config.js -o ./projects/ngx-resizeable/src/lib/tailwind.scss & ng build ngx-resizeable",
+    "publish": "cd dist/ngx-resizeable && npm publish --access public"
   },
   "private": true,
   "dependencies": {
