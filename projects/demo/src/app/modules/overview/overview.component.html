@@ -1,0 +1,9 @@
+<div class="text-center">
+    <h3>Drag and pull the edges of the rectangle</h3>
+    <div class="relative flex top-32 h-32 w-32 m-auto bg-red-500 box-border" [ngStyle]="style" Resizeable [validateResize]="validate" [enableGhostResize]="true" [resizeSnapGrid]="{ left: 50, right: 50 }" (resizeEnd)="onResizeEnd($event)">
+        <div class="absolute h-1 w-full top-0 cursor-row-resize" Resize [resizeEdges]="{ top: true }"></div>
+        <div class="absolute h-full w-1 left-0 cursor-col-resize" Resize [resizeEdges]="{ left: true }"></div>
+        <div class="absolute h-full w-1 right-0 cursor-col-resize" Resize [resizeEdges]="{ right: true }"></div>
+        <div class="absolute h-1 w-full bottom-0 cursor-row-resize" Resize [resizeEdges]="{ bottom: true }"></div>
+    </div>
+</div>

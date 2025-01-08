@@ -36,15 +36,15 @@
 
     .dark
         // backgrounds   
-        --primary       : rgb(21, 21, 23)
-        --secondary     : rgb(40, 40, 40)
+        --primary       : rgb(13, 17, 22)
+        --secondary     : rgb(32, 41, 48)
         --tertiary      : rgb(32, 32, 32)
         --accent        : rgb(37, 99, 235)
         --accent-lighter : rgb(58, 115, 238)
         --accent-darker : rgb(35, 60, 116)
 
         // border
-        --borderline    : rgb(56, 56, 56)
+        --borderline    : rgb(58, 65, 72)
 
         // text
         --darker        : rgb(240, 240, 240)
@@ -69,3 +69,13 @@
 
 body
     @apply bg-primary text-dark
+
+.scrollbar-hide
+    -ms-overflow-style: none
+    scrollbar-width: none
+    overflow-y: scroll
+
+    &::-webkit-scrollbar
+        display: none
+        width: 0
+        height: 0

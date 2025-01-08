@@ -1,35 +1,48 @@
 import { Component } from '@angular/core';
 import { NgxResizeableDirective, ResizeEvent, ResizeHandleDirective } from '../../../ngx-resizeable/src/public-api';
-import { NgStyle } from '@angular/common';
+import { AsyncPipe, CommonModule, NgStyle } from '@angular/common';
+import { IconsComponent } from './shared/components/icons/icons.component';
+import { RouterModule } from '@angular/router';
+import { GithubService } from './core/services/github.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   imports: [
-    NgxResizeableDirective,
-    ResizeHandleDirective,
-    NgStyle
+    AsyncPipe,
+    CommonModule,
+    IconsComponent,
+    // JsonPipe,
+    RouterModule
+  ],
+  providers: [
+    GithubService
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.sass'
 })
 export class AppComponent {
-  public style: object = {}
+  repos$: Observable<any>
+  this_repo$: Observable<any>
+  user$: Observable<any>
 
-  validate(event: ResizeEvent): boolean {
-    const MIN_DIMENSIONS_PX: number = 50
-    if (event.rectangle.width && event.rectangle.height && (event.rectangle.width < MIN_DIMENSIONS_PX || event.rectangle.height < MIN_DIMENSIONS_PX)) {
-      return false
-    }
-    return true
+  show_settings: boolean = false
+  name: string = ''
+  version: string = '0.0.1'
+  
+  constructor(private githubService: GithubService) {
+    this.repos$ = this.githubService.repos$
+    this.this_repo$ = this.githubService.this_repo$
+    this.user$ = this.githubService.user$
+
+    this.name = this.githubService.getThisRepo()
+    this.version = this.githubService.getVersion()
   }
 
-  onResizeEnd(event: any): void {
-    this.style = {
-      position: 'fixed',
-      left: `${event.rectangle.left}px`,
-      top: `${event.rectangle.top}px`,
-      width: `${event.rectangle.width}px`,
-      height: `${event.rectangle.height}px`
-    }
+  toggleSettings() {
+    this.show_settings = !this.show_settings
+  }
+  toggleTheme() {
+    this.toggleSettings()
   }
 }
