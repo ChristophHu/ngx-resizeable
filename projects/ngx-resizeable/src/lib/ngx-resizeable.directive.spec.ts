@@ -1,15 +1,14 @@
-import { NgxResizeableDirective } from './ngx-resizeable.directive';
+import { ResizeableDirective } from './ngx-resizeable.directive';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { MOUSE_MOVE_THROTTLE_MS, ResizableDirective } from '../lib/resizable.directive';
-import { Edges } from '../lib/interfaces/edges.interface';
-import { ResizableModule, ResizeEvent } from '../public-api';
+import { Edges } from '../lib/models/edges.model';
+import { ResizeEvent } from '../public-api';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 
 describe('NgxResizeableDirective', () => {
   it('should create an instance', () => {
-    const directive = new NgxResizeableDirective()
+    const directive = new ResizeableDirective()
     expect(directive).toBeTruthy()
   })
 })
@@ -104,7 +103,7 @@ describe('NgxResizeableDirective', () => {
   `,
 })
 class TestComponent {
-  @ViewChild(ResizableDirective) resizable: ResizableDirective;
+  @ViewChild(ResizeableDirective) resizable: ResizeableDirective;
   @ViewChild('handle') handle: ElementRef;
   style: object = {};
   resizeStart: sinon.SinonSpy = sinon.spy();

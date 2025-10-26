@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { NgxResizeableDirective, ResizeEvent, ResizeHandleDirective } from '../../../ngx-resizeable/src/public-api';
-import { AsyncPipe, CommonModule, NgStyle } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { IconsComponent } from './shared/components/icons/icons.component';
 import { RouterModule } from '@angular/router';
 import { GithubService } from './core/services/github.service';

@@ -132,7 +132,7 @@ export const MOUSE_MOVE_THROTTLE_MS: number = 50
   selector: '[Resizeable]',
   standalone: true
 })
-export class NgxResizeableDirective implements OnInit, OnDestroy {
+export class ResizeableDirective implements OnInit, OnDestroy {
 
   @Input() validateResize!: (resizeEvent: ResizeEvent) => boolean
   @Input() enableGhostResize: boolean = false

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { NgxResizeableDirective, ResizeEvent, ResizeHandleDirective } from '../../../../../ngx-resizeable/src/public-api';
+import { ResizeableDirective, ResizeEvent, ResizeHandleDirective } from '../../../../../ngx-resizeable/src/public-api';
 import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-overview',
   imports: [
-    NgxResizeableDirective,
+    ResizeableDirective,
     ResizeHandleDirective,
     NgStyle
   ],
